@@ -1,70 +1,86 @@
-// LocalStorage se data read karna
-let students = JSON.parse(localStorage.getItem("students")) || [];
+let students = JSON.parse(localStorage.getItem("students_data")) || [];
 
-const studentForm = document.getElementById("studentForm");
-const studentTableBody = document.getElementById("studentTableBody");
+const form = document.getElementById("studentForm");
+const tableBody = document.getElementById("studentTableBody");
+const searchInput = document.getElementById("searchInput");
 
-// Form submit handle karna
-studentForm.addEventListener("submit", function (e) {
+form.addEventListener("submit", function (e) {
   e.preventDefault();
 
   const rollNo = document.getElementById("rollNo").value.trim();
   const name = document.getElementById("name").value.trim();
   const branch = document.getElementById("branch").value.trim();
-  const marks = document.getElementById("marks").value.trim();
+  const apaarId = document.getElementById("apaarId").value.trim();
+  const studentMobile = document.getElementById("studentMobile").value.trim();
+  const fatherMobile = document.getElementById("fatherMobile").value.trim();
 
-  // Duplicate Roll Check
-  if (students.some((s) => s.rollNo === rollNo)) {
-    alert("This Roll Number already exists!");
+  const isDuplicate = students.some(s => s.rollNo.toLowerCase() === rollNo.toLowerCase());
+  if (isDuplicate) {
+    alert("A student with this Roll Number is already registered!");
     return;
   }
 
-  const newStudent = { rollNo, name, branch, marks };
-  students.push(newStudent);
+  const newRecord = {
+    rollNo,
+    name,
+    branch,
+    apaarId,
+    studentMobile,
+    fatherMobile
+  };
 
-  // LocalStorage update aur table render
-  localStorage.setItem("students", JSON.stringify(students));
-  studentForm.reset();
-  renderStudents(students);
+  students.push(newRecord);
+  localStorage.setItem("students_data", JSON.stringify(students));
+  
+  form.reset();
+  renderTable(students);
 });
 
-// Records ko Table me print karna
-function renderStudents(data) {
-  studentTableBody.innerHTML = "";
+function renderTable(data) {
+  tableBody.innerHTML = "";
 
   if (data.length === 0) {
-    studentTableBody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#64748b;">No records found.</td></tr>`;
+    tableBody.innerHTML = `
+      <tr>
+        <td colspan="7" class="empty-state">No student records found.</td>
+      </tr>
+    `;
     return;
   }
 
-  data.forEach((student, index) => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-      <td>${student.rollNo}</td>
-      <td>${student.name}</td>
-      <td>${student.branch}</td>
-      <td>${student.marks}%</td>
-      <td><button class="delete-btn" onclick="deleteStudent('${student.rollNo}')">Delete</button></td>
+  data.forEach((st) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td><strong>${st.rollNo}</strong></td>
+      <td>${st.name}</td>
+      <td>${st.branch}</td>
+      <td>${st.apaarId}</td>
+      <td>${st.studentMobile}</td>
+      <td>${st.fatherMobile}</td>
+      <td>
+        <button class="btn-delete" onclick="deleteRecord('${st.rollNo}')">Delete</button>
+      </td>
     `;
-    studentTableBody.appendChild(row);
+    tableBody.appendChild(tr);
   });
 }
 
-// Student Delete karna
-function deleteStudent(rollNo) {
-  students = students.filter((s) => s.rollNo !== rollNo);
-  localStorage.setItem("students", JSON.stringify(students));
-  renderStudents(students);
+function deleteRecord(rollNo) {
+  if (confirm(`Are you sure you want to remove Roll No: ${rollNo}?`)) {
+    students = students.filter(s => s.rollNo !== rollNo);
+    localStorage.setItem("students_data", JSON.stringify(students));
+    renderTable(students);
+  }
 }
 
-// Live Search Filter
-function filterStudents() {
-  const query = document.getElementById("searchInput").value.toLowerCase();
-  const filtered = students.filter(
-    (s) => s.rollNo.toLowerCase().includes(query) || s.name.toLowerCase().includes(query)
+function searchStudentRecords() {
+  const query = searchInput.value.toLowerCase().trim();
+  const filtered = students.filter(st => 
+    st.rollNo.toLowerCase().includes(query) ||
+    st.name.toLowerCase().includes(query) ||
+    st.apaarId.toLowerCase().includes(query)
   );
-  renderStudents(filtered);
+  renderTable(filtered);
 }
 
-// Initial Render
-renderStudents(students);
+renderTable(students);
