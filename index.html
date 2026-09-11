@@ -7,17 +7,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #4f46e5;
-      --primary-dark: #4338ca;
-      --accent: #06b6d4;
-      --bg: #0b0f19;
-      --card-bg: rgba(17, 24, 39, 0.85);
-      --input-bg: #1e293b;
-      --border: rgba(255, 255, 255, 0.1);
+      --primary: #06b6d4;
+      --primary-dark: #0891b2;
+      --accent: #3b82f6;
+      --bg: #030712;
+      --card-bg: rgba(15, 23, 42, 0.88);
+      --input-bg: #0b1329;
+      --border: rgba(56, 189, 248, 0.18);
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
       --danger: #f43f5e;
-      --danger-dark: #e11d48;
       --success: #10b981;
     }
 
@@ -31,44 +30,52 @@
     body {
       background-color: var(--bg);
       background-image: 
-        radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.2) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.15) 0px, transparent 50%);
+        radial-gradient(at 0% 0%, rgba(6, 182, 212, 0.18) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(59, 130, 246, 0.18) 0px, transparent 50%);
       color: var(--text-main);
-      padding: 30px 14px;
+      padding: 24px 14px;
       display: flex;
       justify-content: center;
+      align-items: center;
       min-height: 100vh;
     }
 
     .container {
       width: 100%;
-      max-width: 1050px;
+      max-width: 1080px;
       background: var(--card-bg);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
       border-radius: 28px;
       border: 1px solid var(--border);
       padding: 36px 28px;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 40px rgba(79, 70, 229, 0.15);
+      box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.7), 0 0 45px rgba(6, 182, 212, 0.12);
     }
 
-    /* Rotating Circular Badge with Outer Curved Text */
+    .auth-container {
+      max-width: 440px;
+      padding: 40px 32px;
+      text-align: center;
+    }
+
+    /* Rotating Circular Badge */
     .header-branding {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-bottom: 30px;
+      margin-bottom: 26px;
       text-align: center;
+      position: relative;
     }
 
     .rotating-badge-box {
       position: relative;
-      width: 140px;
-      height: 140px;
+      width: 130px;
+      height: 130px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
 
     .circular-text-svg {
@@ -94,63 +101,59 @@
     }
 
     .core-circle {
-      width: 76px;
-      height: 76px;
+      width: 72px;
+      height: 72px;
       background: #000000;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 25px rgba(56, 189, 248, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.15);
-      border: 2px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 0 25px rgba(6, 182, 212, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.2);
       z-index: 2;
     }
 
     .student-svg-icon {
-      width: 40px;
-      height: 40px;
+      width: 38px;
+      height: 38px;
       fill: #ffffff;
-      filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.2));
+      filter: drop-shadow(0 2px 5px rgba(255, 255, 255, 0.3));
     }
 
-    .header-branding h2 {
-      font-size: 26px;
+    h2.portal-title {
+      font-size: 24px;
       font-weight: 800;
       background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      letter-spacing: -0.5px;
+      letter-spacing: -0.4px;
     }
 
-    .header-branding p {
+    p.portal-subtitle {
       font-size: 13px;
       color: var(--text-muted);
       margin-top: 4px;
     }
 
-    /* Form Container */
-    .student-form {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    /* Auth Forms */
+    .auth-form-box {
+      display: flex;
+      flex-direction: column;
       gap: 14px;
-      background: rgba(30, 41, 59, 0.5);
-      border: 1px solid var(--border);
-      padding: 22px;
-      border-radius: 20px;
-      margin-bottom: 24px;
+      margin-top: 10px;
     }
 
     .form-group {
       display: flex;
       flex-direction: column;
       gap: 6px;
+      text-align: left;
     }
 
     .form-group label {
       font-size: 12px;
       font-weight: 600;
       color: var(--text-muted);
-      letter-spacing: 0.3px;
     }
 
     input {
@@ -167,40 +170,72 @@
 
     input:focus {
       border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.25);
-      background: #243047;
+      box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.2);
+      background: #0f1c3f;
     }
 
     input::placeholder {
-      color: #64748b;
+      color: #475569;
     }
 
-    /* Unique Glowing Buttons */
+    /* Modern Buttons */
     .btn-submit {
-      grid-column: 1 / -1;
-      background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+      background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
       color: #ffffff;
-      padding: 14px;
+      padding: 13px;
       border: none;
-      border-radius: 14px;
+      border-radius: 12px;
       font-weight: 700;
       font-size: 14px;
       cursor: pointer;
-      box-shadow: 0 8px 20px -4px rgba(79, 70, 229, 0.5);
+      box-shadow: 0 8px 20px -4px rgba(6, 182, 212, 0.45);
       transition: all 0.25s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 6px;
     }
 
     .btn-submit:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 25px -4px rgba(79, 70, 229, 0.7);
+      box-shadow: 0 12px 25px -4px rgba(6, 182, 212, 0.6);
     }
 
-    /* Search & Export Toolbar */
+    .header-actions {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+
+    .btn-logout {
+      background: rgba(244, 63, 94, 0.12);
+      color: var(--danger);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-logout:hover {
+      background: var(--danger);
+      color: #ffffff;
+    }
+
+    /* Dashboard Layout */
+    .student-form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      background: rgba(11, 19, 41, 0.7);
+      border: 1px solid var(--border);
+      padding: 22px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+
+    .student-form .btn-submit {
+      grid-column: 1 / -1;
+      margin-top: 4px;
+    }
+
     .toolbar {
       display: flex;
       gap: 12px;
@@ -217,30 +252,24 @@
       background: rgba(16, 185, 129, 0.15);
       color: var(--success);
       border: 1px solid rgba(16, 185, 129, 0.3);
-      padding: 0 20px;
+      padding: 0 18px;
       border-radius: 12px;
       font-weight: 600;
       font-size: 13px;
       cursor: pointer;
-      transition: all 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 8px;
     }
 
     .btn-export:hover {
       background: var(--success);
       color: #ffffff;
-      box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
     }
 
-    /* Custom Responsive Table */
     .table-container {
       width: 100%;
       overflow-x: auto;
       border: 1px solid var(--border);
       border-radius: 16px;
-      background: rgba(15, 23, 42, 0.6);
+      background: rgba(8, 14, 30, 0.75);
     }
 
     table {
@@ -252,7 +281,7 @@
     }
 
     th {
-      background: rgba(30, 41, 59, 0.8);
+      background: rgba(15, 23, 42, 0.95);
       color: var(--text-muted);
       font-weight: 700;
       padding: 14px 16px;
@@ -273,12 +302,12 @@
     }
 
     .badge-roll {
-      background: rgba(79, 70, 229, 0.2);
-      color: #a5b4fc;
+      background: rgba(6, 182, 212, 0.15);
+      color: #38bdf8;
       padding: 4px 10px;
       border-radius: 8px;
       font-weight: 700;
-      border: 1px solid rgba(79, 70, 229, 0.3);
+      border: 1px solid rgba(6, 182, 212, 0.3);
     }
 
     .btn-delete {
@@ -290,13 +319,11 @@
       font-size: 12px;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.2s;
     }
 
     .btn-delete:hover {
       background: var(--danger);
       color: #ffffff;
-      box-shadow: 0 0 12px rgba(244, 63, 94, 0.4);
     }
 
     .empty-state {
@@ -304,38 +331,94 @@
       padding: 36px 16px;
       color: var(--text-muted);
     }
+
+    .hidden {
+      display: none !important;
+    }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <!-- Rotating Perimeter Logo & Header -->
+  <!-- Screen 1: Master Password Set / Login -->
+  <div class="container auth-container" id="authSection">
     <div class="header-branding">
       <div class="rotating-badge-box">
         <svg class="circular-text-svg" viewBox="0 0 160 160">
           <defs>
-            <path id="circlePath" d="M 80, 80 m -62, 0 a 62,62 0 1,1 124,0 a 62,62 0 1,1 -124,0" />
+            <path id="authCirclePath" d="M 80, 80 m -62, 0 a 62,62 0 1,1 124,0 a 62,62 0 1,1 -124,0" />
           </defs>
           <text>
-            <textPath xlink:href="#circlePath" startOffset="0%">
+            <textPath xlink:href="#authCirclePath" startOffset="0%">
               WELCOME TO THE STUDENT MANAGEMENT PORTAL •
             </textPath>
           </text>
         </svg>
 
         <div class="core-circle">
-          <!-- White Student Cap/Avatar Vector Icon -->
           <svg class="student-svg-icon" viewBox="0 0 24 24">
             <path d="M12 3L1 9L12 15L21 10.09V17H23V9M5 13.18V17.18C5 19.94 8.13 22 12 22C15.87 22 19 19.94 19 17.18V13.18L12 17L5 13.18Z"/>
           </svg>
         </div>
       </div>
 
-      <h2>Student Management Portal</h2>
-      <p>Department of Information Technology</p>
+      <h2 class="portal-title" id="authHeaderTitle">Security Check</h2>
+      <p class="portal-subtitle" id="authHeaderSubtitle">Create your device master password</p>
     </div>
 
-    <!-- Registration Form -->
+    <!-- First Time: Create Password -->
+    <form class="auth-form-box" id="setupForm">
+      <div class="form-group">
+        <label>Set Master Password</label>
+        <input type="password" id="createPass" placeholder="Enter new password" required />
+      </div>
+      <div class="form-group">
+        <label>Confirm Password</label>
+        <input type="password" id="confirmPass" placeholder="Re-enter password" required />
+      </div>
+      <button type="submit" class="btn-submit">Save Password & Continue ➜</button>
+    </form>
+
+    <!-- Subsequent Times: Unlock -->
+    <form class="auth-form-box hidden" id="loginForm">
+      <div class="form-group">
+        <label>Enter Master Password</label>
+        <input type="password" id="loginPass" placeholder="Enter password to unlock" required />
+      </div>
+      <button type="submit" class="btn-submit">Unlock Portal 🔓</button>
+    </form>
+  </div>
+
+  <!-- Screen 2: Main Student Management Dashboard -->
+  <div class="container hidden" id="dashboardSection">
+    <div class="header-branding">
+      <div class="header-actions">
+        <button class="btn-logout" onclick="logoutSession()">Lock Portal 🔒</button>
+      </div>
+
+      <div class="rotating-badge-box">
+        <svg class="circular-text-svg" viewBox="0 0 160 160">
+          <defs>
+            <path id="dashCirclePath" d="M 80, 80 m -62, 0 a 62,62 0 1,1 124,0 a 62,62 0 1,1 -124,0" />
+          </defs>
+          <text>
+            <textPath xlink:href="#dashCirclePath" startOffset="0%">
+              WELCOME TO THE STUDENT MANAGEMENT PORTAL •
+            </textPath>
+          </text>
+        </svg>
+
+        <div class="core-circle">
+          <svg class="student-svg-icon" viewBox="0 0 24 24">
+            <path d="M12 3L1 9L12 15L21 10.09V17H23V9M5 13.18V17.18C5 19.94 8.13 22 12 22C15.87 22 19 19.94 19 17.18V13.18L12 17L5 13.18Z"/>
+          </svg>
+        </div>
+      </div>
+
+      <h2 class="portal-title">Student Management Portal</h2>
+      <p class="portal-subtitle">Department of Information Technology</p>
+    </div>
+
+    <!-- Student Form -->
     <form class="student-form" id="studentForm">
       <div class="form-group">
         <label>Roll Number</label>
@@ -387,12 +470,10 @@
         <input type="tel" id="fatherMobile" placeholder="10-digit number" pattern="[0-9]{10}" required />
       </div>
 
-      <button type="submit" class="btn-submit">
-        <span>Register New Student</span> ➜
-      </button>
+      <button type="submit" class="btn-submit">Register New Student ➜</button>
     </form>
 
-    <!-- Toolbar: Search + Export -->
+    <!-- Search & Export -->
     <div class="toolbar">
       <div class="search-input-wrap">
         <input 
@@ -402,12 +483,10 @@
           onkeyup="searchRecords()"
         />
       </div>
-      <button class="btn-export" onclick="exportToCSV()">
-        <span>Export to Excel/CSV</span> ⬇
-      </button>
+      <button class="btn-export" onclick="exportToCSV()">Export to Excel/CSV ⬇</button>
     </div>
 
-    <!-- Records Table -->
+    <!-- Table -->
     <div class="table-container">
       <table>
         <thead>
@@ -431,13 +510,95 @@
   </div>
 
   <script>
+    // Authentication Logic (Device-Specific Isolation)
+    const AUTH_KEY = "portal_device_master_hash";
+    const SESSION_KEY = "portal_active_session";
+
+    const authSection = document.getElementById("authSection");
+    const dashboardSection = document.getElementById("dashboardSection");
+    const setupForm = document.getElementById("setupForm");
+    const loginForm = document.getElementById("loginForm");
+    const authHeaderTitle = document.getElementById("authHeaderTitle");
+    const authHeaderSubtitle = document.getElementById("authHeaderSubtitle");
+
+    function checkAuthFlow() {
+      const savedPass = localStorage.getItem(AUTH_KEY);
+      const isUnlocked = sessionStorage.getItem(SESSION_KEY);
+
+      if (isUnlocked === "true") {
+        showDashboard();
+        return;
+      }
+
+      authSection.classList.remove("hidden");
+      dashboardSection.classList.add("hidden");
+
+      if (!savedPass) {
+        // Naya user: password create karega
+        setupForm.classList.remove("hidden");
+        loginForm.classList.add("hidden");
+        authHeaderTitle.innerText = "Setup Master Password";
+        authHeaderSubtitle.innerText = "Create your own password for this device";
+      } else {
+        // Purana user: password enter karega
+        setupForm.classList.add("hidden");
+        loginForm.classList.remove("hidden");
+        authHeaderTitle.innerText = "Security Verification";
+        authHeaderSubtitle.innerText = "Enter your password to unlock";
+      }
+    }
+
+    setupForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+      const p1 = document.getElementById("createPass").value;
+      const p2 = document.getElementById("confirmPass").value;
+
+      if (p1.length < 4) {
+        alert("Password must be at least 4 characters long!");
+        return;
+      }
+      if (p1 !== p2) {
+        alert("Passwords do not match. Please try again!");
+        return;
+      }
+
+      localStorage.setItem(AUTH_KEY, btoa(p1));
+      sessionStorage.setItem(SESSION_KEY, "true");
+      showDashboard();
+    });
+
+    loginForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+      const entered = document.getElementById("loginPass").value;
+      const saved = localStorage.getItem(AUTH_KEY);
+
+      if (btoa(entered) === saved) {
+        sessionStorage.setItem(SESSION_KEY, "true");
+        showDashboard();
+      } else {
+        alert("Incorrect password! Access denied.");
+      }
+    });
+
+    function showDashboard() {
+      authSection.classList.add("hidden");
+      dashboardSection.classList.remove("hidden");
+      renderTable(students);
+    }
+
+    function logoutSession() {
+      sessionStorage.removeItem(SESSION_KEY);
+      document.getElementById("loginPass").value = "";
+      checkAuthFlow();
+    }
+
+    // Student Database Logic
     let students = JSON.parse(localStorage.getItem("students_master_db")) || [];
 
     const form = document.getElementById("studentForm");
     const tableBody = document.getElementById("studentTableBody");
     const searchInput = document.getElementById("searchInput");
 
-    // Add Record
     form.addEventListener("submit", function (e) {
       e.preventDefault();
 
@@ -452,13 +613,12 @@
       const studentMobile = document.getElementById("studentMobile").value.trim();
       const fatherMobile = document.getElementById("fatherMobile").value.trim();
 
-      // Duplicate Check
       if (students.some(s => s.rollNo.toLowerCase() === rollNo.toLowerCase())) {
-        alert("A student with this Roll Number is already registered!");
+        alert("Roll Number already registered!");
         return;
       }
       if (students.some(s => s.aadhaarNo === aadhaarNo)) {
-        alert("This Aadhaar Number is already associated with another record!");
+        alert("This Aadhaar Number is already associated with an existing record!");
         return;
       }
 
@@ -482,7 +642,6 @@
       renderTable(students);
     });
 
-    // Render Table
     function renderTable(data) {
       tableBody.innerHTML = "";
 
@@ -516,7 +675,6 @@
       });
     }
 
-    // Delete Record
     function deleteRecord(rollNo) {
       if (confirm(`Remove record for Roll Number: ${rollNo}?`)) {
         students = students.filter(s => s.rollNo !== rollNo);
@@ -525,7 +683,6 @@
       }
     }
 
-    // Multi-Field Universal Search
     function searchRecords() {
       const q = searchInput.value.toLowerCase().trim();
       const filtered = students.filter(st => 
@@ -539,7 +696,6 @@
       renderTable(filtered);
     }
 
-    // Export Data to CSV (Directly opens in Excel)
     function exportToCSV() {
       if (students.length === 0) {
         alert("No student data available to export!");
@@ -570,8 +726,8 @@
       document.body.removeChild(link);
     }
 
-    // Initialize View
-    renderTable(students);
+    // App Initialization
+    checkAuthFlow();
   </script>
 </body>
 </html>
