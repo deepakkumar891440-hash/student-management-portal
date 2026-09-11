@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Management Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --danger: #ef4444;
+      --danger-dark: #dc2626;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      padding: 24px 14px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      background: var(--card);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      padding: 24px;
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .header {
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .header h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .header p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Form Grid */
+    .student-form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      background: #f1f5f9;
+      padding: 18px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .form-group label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 13px;
+      background: #ffffff;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input:focus {
+      border-color: var(--primary);
+    }
+
+    .btn-submit {
+      grid-column: 1 / -1;
+      background: var(--primary);
+      color: #ffffff;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 6px;
+    }
+
+    .btn-submit:hover {
+      background: var(--primary-dark);
+    }
+
+    /* Search Bar */
+    .search-box {
+      margin-bottom: 18px;
+    }
+
+    .search-box input {
+      padding: 12px 14px;
+      font-size: 14px;
+      border-color: #cbd5e1;
+    }
+
+    /* Table Container with Scroll */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    th {
+      background: #f8fafc;
+      color: var(--text-muted);
+      font-weight: 600;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-main);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .btn-delete {
+      background: var(--danger);
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-delete:hover {
+      background: var(--danger-dark);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 24px;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header">
+      <h2>Student Management Portal</h2>
+      <p>Department of Information Technology</p>
+    </div>
+
+    <!-- Student Registration Form -->
+    <form class="student-form" id="studentForm">
+      <div class="form-group">
+        <label for="rollNo">Roll Number</label>
+        <input type="text" id="rollNo" placeholder="e.g. 210105001" required />
+      </div>
+
+      <div class="form-group">
+        <label for="name">Student Name</label>
+        <input type="text" id="name" placeholder="Full Name" required />
+      </div>
+
+      <div class="form-group">
+        <label for="branch">Branch</label>
+        <input type="text" id="branch" placeholder="e.g. IT" required />
+      </div>
+
+      <div class="form-group">
+        <label for="apaarId">APAAR ID</label>
+        <input type="text" id="apaarId" placeholder="12-digit APAAR Number" required />
+      </div>
+
+      <div class="form-group">
+        <label for="studentMobile">Student Mobile No</label>
+        <input type="tel" id="studentMobile" placeholder="10-digit number" pattern="[0-9]{10}" required />
+      </div>
+
+      <div class="form-group">
+        <label for="fatherMobile">Father Mobile No</label>
+        <input type="tel" id="fatherMobile" placeholder="10-digit number" pattern="[0-9]{10}" required />
+      </div>
+
+      <button type="submit" class="btn-submit">Add Student Record</button>
+    </form>
+
+    <!-- Search Section -->
+    <div class="search-box">
+      <input 
+        type="text" 
+        id="searchInput" 
+        placeholder="🔍 Search student by Roll No, Name, or APAAR ID..." 
+        onkeyup="searchStudentRecords()"
+      />
+    </div>
+
+    <!-- Records Table -->
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Roll No</th>
+            <th>Name</th>
+            <th>Branch</th>
+            <th>APAAR ID</th>
+            <th>Student Mobile</th>
+            <th>Father Mobile</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="studentTableBody">
+          <!-- Javascript dynamic content -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    let students = JSON.parse(localStorage.getItem("students_data")) || [];
+
+    const form = document.getElementById("studentForm");
+    const tableBody = document.getElementById("studentTableBody");
+    const searchInput = document.getElementById("searchInput");
+
+    // Form submission
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const rollNo = document.getElementById("rollNo").value.trim();
+      const name = document.getElementById("name").value.trim();
+      const branch = document.getElementById("branch").value.trim();
+      const apaarId = document.getElementById("apaarId").value.trim();
+      const studentMobile = document.getElementById("studentMobile").value.trim();
+      const fatherMobile = document.getElementById("fatherMobile").value.trim();
+
+      // Check unique Roll No or APAAR ID
+      const isDuplicate = students.some(s => s.rollNo.toLowerCase() === rollNo.toLowerCase());
+      if (isDuplicate) {
+        alert("A student with this Roll Number is already registered!");
+        return;
+      }
+
+      const newRecord = {
+        rollNo,
+        name,
+        branch,
+        apaarId,
+        studentMobile,
+        fatherMobile
+      };
+
+      students.push(newRecord);
+      localStorage.setItem("students_data", JSON.stringify(students));
+      
+      form.reset();
+      renderTable(students);
+    });
+
+    // Render Data to Table
+    function renderTable(data) {
+      tableBody.innerHTML = "";
+
+      if (data.length === 0) {
+        tableBody.innerHTML = `
+          <tr>
+            <td colspan="7" class="empty-state">No student records found.</td>
+          </tr>
+        `;
+        return;
+      }
+
+      data.forEach((st) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td><strong>${st.rollNo}</strong></td>
+          <td>${st.name}</td>
+          <td>${st.branch}</td>
+          <td>${st.apaarId}</td>
+          <td>${st.studentMobile}</td>
+          <td>${st.fatherMobile}</td>
+          <td>
+            <button class="btn-delete" onclick="deleteRecord('${st.rollNo}')">Delete</button>
+          </td>
+        `;
+        tableBody.appendChild(tr);
+      });
+    }
+
+    // Delete Record
+    function deleteRecord(rollNo) {
+      if (confirm(`Are you sure you want to remove Roll No: ${rollNo}?`)) {
+        students = students.filter(s => s.rollNo !== rollNo);
+        localStorage.setItem("students_data", JSON.stringify(students));
+        renderTable(students);
+      }
+    }
+
+    // Search Feature (Roll, Name, or APAAR ID)
+    function searchStudentRecords() {
+      const query = searchInput.value.toLowerCase().trim();
+      const filtered = students.filter(st => 
+        st.rollNo.toLowerCase().includes(query) ||
+        st.name.toLowerCase().includes(query) ||
+        st.apaarId.toLowerCase().includes(query)
+      );
+      renderTable(filtered);
+    }
+
+    // First load execution
+    renderTable(students);
+  </script>
+</body>
+</html>
