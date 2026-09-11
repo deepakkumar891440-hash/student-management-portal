@@ -8,37 +8,73 @@
 </head>
 <body>
   <div class="container">
-    <h2>Student Management Portal</h2>
-    
-    <!-- Input Form -->
-    <form id="studentForm">
-      <input type="text" id="rollNo" placeholder="Roll Number" required />
-      <input type="text" id="name" placeholder="Student Name" required />
-      <input type="text" id="branch" placeholder="Branch (e.g. IT)" required />
-      <input type="number" id="marks" placeholder="Marks (%)" required />
-      <button type="submit" id="submitBtn">Add Student</button>
-    </form>
-
-    <!-- Search Box -->
-    <div class="search-box">
-      <input type="text" id="searchInput" placeholder="Search by Roll No or Name..." onkeyup="filterStudents()" />
+    <div class="header">
+      <h2>Student Management Portal</h2>
+      <p>Department of Information Technology</p>
     </div>
 
-    <!-- Student Records Table -->
-    <table>
-      <thead>
-        <tr>
-          <th>Roll No</th>
-          <th>Name</th>
-          <th>Branch</th>
-          <th>Marks</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody id="studentTableBody">
-        <!-- Records yahan dynamic insert honge -->
-      </tbody>
-    </table>
+    <!-- Student Form -->
+    <form class="student-form" id="studentForm">
+      <div class="form-group">
+        <label>Roll Number</label>
+        <input type="text" id="rollNo" placeholder="e.g. 210105001" required />
+      </div>
+
+      <div class="form-group">
+        <label>Student Name</label>
+        <input type="text" id="name" placeholder="Full Name" required />
+      </div>
+
+      <div class="form-group">
+        <label>Branch</label>
+        <input type="text" id="branch" placeholder="e.g. IT" required />
+      </div>
+
+      <div class="form-group">
+        <label>APAAR ID</label>
+        <input type="text" id="apaarId" placeholder="12-digit APAAR Number" required />
+      </div>
+
+      <div class="form-group">
+        <label>Student Mobile No</label>
+        <input type="tel" id="studentMobile" placeholder="10-digit number" pattern="[0-9]{10}" required />
+      </div>
+
+      <div class="form-group">
+        <label>Father Mobile No</label>
+        <input type="tel" id="fatherMobile" placeholder="10-digit number" pattern="[0-9]{10}" required />
+      </div>
+
+      <button type="submit" class="btn-submit">Add Student Record</button>
+    </form>
+
+    <!-- Search Section -->
+    <div class="search-box">
+      <input 
+        type="text" 
+        id="searchInput" 
+        placeholder="🔍 Search student by Roll No, Name, or APAAR ID..." 
+        onkeyup="searchStudentRecords()"
+      />
+    </div>
+
+    <!-- Table -->
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Roll No</th>
+            <th>Name</th>
+            <th>Branch</th>
+            <th>APAAR ID</th>
+            <th>Student Mobile</th>
+            <th>Father Mobile</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="studentTableBody"></tbody>
+      </table>
+    </div>
   </div>
 
   <script src="script.js"></script>
