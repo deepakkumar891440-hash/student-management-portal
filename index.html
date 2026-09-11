@@ -4,18 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Student Management Portal</title>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #2563eb;
-      --primary-dark: #1d4ed8;
-      --bg: #f8fafc;
-      --card: #ffffff;
-      --text-main: #0f172a;
-      --text-muted: #64748b;
-      --border: #e2e8f0;
-      --danger: #ef4444;
-      --danger-dark: #dc2626;
+      --primary: #4f46e5;
+      --primary-dark: #4338ca;
+      --accent: #06b6d4;
+      --bg: #0b0f19;
+      --card-bg: rgba(17, 24, 39, 0.85);
+      --input-bg: #1e293b;
+      --border: rgba(255, 255, 255, 0.1);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --danger: #f43f5e;
+      --danger-dark: #e11d48;
+      --success: #10b981;
     }
 
     * {
@@ -27,112 +30,217 @@
 
     body {
       background-color: var(--bg);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.2) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.15) 0px, transparent 50%);
       color: var(--text-main);
-      padding: 24px 14px;
+      padding: 30px 14px;
       display: flex;
       justify-content: center;
+      min-height: 100vh;
     }
 
     .container {
       width: 100%;
-      max-width: 900px;
-      background: var(--card);
-      border-radius: 16px;
+      max-width: 1050px;
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 28px;
       border: 1px solid var(--border);
-      padding: 24px;
-      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+      padding: 36px 28px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 40px rgba(79, 70, 229, 0.15);
     }
 
-    .header {
-      margin-bottom: 24px;
+    /* Rotating Circular Badge with Outer Curved Text */
+    .header-branding {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 30px;
       text-align: center;
     }
 
-    .header h2 {
-      font-size: 24px;
-      font-weight: 700;
-      color: var(--text-main);
+    .rotating-badge-box {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
     }
 
-    .header p {
+    .circular-text-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      animation: rotateText 16s linear infinite;
+    }
+
+    .circular-text-svg text {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 2.8px;
+      fill: #38bdf8;
+      text-transform: uppercase;
+    }
+
+    @keyframes rotateText {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .core-circle {
+      width: 76px;
+      height: 76px;
+      background: #000000;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 25px rgba(56, 189, 248, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.15);
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      z-index: 2;
+    }
+
+    .student-svg-icon {
+      width: 40px;
+      height: 40px;
+      fill: #ffffff;
+      filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.2));
+    }
+
+    .header-branding h2 {
+      font-size: 26px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+    }
+
+    .header-branding p {
       font-size: 13px;
       color: var(--text-muted);
       margin-top: 4px;
     }
 
-    /* Form Grid */
+    /* Form Container */
     .student-form {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 12px;
-      background: #f1f5f9;
-      padding: 18px;
-      border-radius: 12px;
-      margin-bottom: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      background: rgba(30, 41, 59, 0.5);
+      border: 1px solid var(--border);
+      padding: 22px;
+      border-radius: 20px;
+      margin-bottom: 24px;
     }
 
     .form-group {
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 6px;
     }
 
     .form-group label {
       font-size: 12px;
       font-weight: 600;
-      color: var(--text-main);
+      color: var(--text-muted);
+      letter-spacing: 0.3px;
     }
 
     input {
       width: 100%;
-      padding: 10px 12px;
+      padding: 12px 14px;
       border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 13px;
-      background: #ffffff;
+      border-radius: 12px;
+      font-size: 13.5px;
+      background: var(--input-bg);
+      color: #ffffff;
       outline: none;
-      transition: border-color 0.2s;
+      transition: all 0.25s ease;
     }
 
     input:focus {
       border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.25);
+      background: #243047;
     }
 
+    input::placeholder {
+      color: #64748b;
+    }
+
+    /* Unique Glowing Buttons */
     .btn-submit {
       grid-column: 1 / -1;
-      background: var(--primary);
+      background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
       color: #ffffff;
-      padding: 12px;
+      padding: 14px;
       border: none;
-      border-radius: 8px;
-      font-weight: 600;
+      border-radius: 14px;
+      font-weight: 700;
       font-size: 14px;
       cursor: pointer;
-      transition: background 0.2s;
+      box-shadow: 0 8px 20px -4px rgba(79, 70, 229, 0.5);
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
       margin-top: 6px;
     }
 
     .btn-submit:hover {
-      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px -4px rgba(79, 70, 229, 0.7);
     }
 
-    /* Search Bar */
-    .search-box {
-      margin-bottom: 18px;
+    /* Search & Export Toolbar */
+    .toolbar {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
     }
 
-    .search-box input {
-      padding: 12px 14px;
-      font-size: 14px;
-      border-color: #cbd5e1;
+    .search-input-wrap {
+      flex: 1;
+      min-width: 260px;
     }
 
-    /* Table Container with Scroll */
+    .btn-export {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--success);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 0 20px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-export:hover {
+      background: var(--success);
+      color: #ffffff;
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+    }
+
+    /* Custom Responsive Table */
     .table-container {
       width: 100%;
       overflow-x: auto;
       border: 1px solid var(--border);
-      border-radius: 10px;
+      border-radius: 16px;
+      background: rgba(15, 23, 42, 0.6);
     }
 
     table {
@@ -144,41 +252,56 @@
     }
 
     th {
-      background: #f8fafc;
+      background: rgba(30, 41, 59, 0.8);
       color: var(--text-muted);
-      font-weight: 600;
-      padding: 12px 14px;
+      font-weight: 700;
+      padding: 14px 16px;
       border-bottom: 1px solid var(--border);
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.6px;
     }
 
     td {
-      padding: 12px 14px;
-      border-bottom: 1px solid var(--border);
-      color: var(--text-main);
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: #cbd5e1;
     }
 
-    tr:last-child td {
-      border-bottom: none;
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .badge-roll {
+      background: rgba(79, 70, 229, 0.2);
+      color: #a5b4fc;
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-weight: 700;
+      border: 1px solid rgba(79, 70, 229, 0.3);
     }
 
     .btn-delete {
-      background: var(--danger);
-      color: white;
-      border: none;
-      padding: 6px 12px;
-      border-radius: 6px;
+      background: rgba(244, 63, 94, 0.15);
+      color: var(--danger);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+      padding: 6px 14px;
+      border-radius: 8px;
       font-size: 12px;
       font-weight: 600;
       cursor: pointer;
+      transition: all 0.2s;
     }
 
     .btn-delete:hover {
-      background: var(--danger-dark);
+      background: var(--danger);
+      color: #ffffff;
+      box-shadow: 0 0 12px rgba(244, 63, 94, 0.4);
     }
 
     .empty-state {
       text-align: center;
-      padding: 24px;
+      padding: 36px 16px;
       color: var(--text-muted);
     }
   </style>
@@ -186,54 +309,102 @@
 <body>
 
   <div class="container">
-    <div class="header">
+    <!-- Rotating Perimeter Logo & Header -->
+    <div class="header-branding">
+      <div class="rotating-badge-box">
+        <svg class="circular-text-svg" viewBox="0 0 160 160">
+          <defs>
+            <path id="circlePath" d="M 80, 80 m -62, 0 a 62,62 0 1,1 124,0 a 62,62 0 1,1 -124,0" />
+          </defs>
+          <text>
+            <textPath xlink:href="#circlePath" startOffset="0%">
+              WELCOME TO THE STUDENT MANAGEMENT PORTAL •
+            </textPath>
+          </text>
+        </svg>
+
+        <div class="core-circle">
+          <!-- White Student Cap/Avatar Vector Icon -->
+          <svg class="student-svg-icon" viewBox="0 0 24 24">
+            <path d="M12 3L1 9L12 15L21 10.09V17H23V9M5 13.18V17.18C5 19.94 8.13 22 12 22C15.87 22 19 19.94 19 17.18V13.18L12 17L5 13.18Z"/>
+          </svg>
+        </div>
+      </div>
+
       <h2>Student Management Portal</h2>
       <p>Department of Information Technology</p>
     </div>
 
-    <!-- Student Registration Form -->
+    <!-- Registration Form -->
     <form class="student-form" id="studentForm">
       <div class="form-group">
-        <label for="rollNo">Roll Number</label>
+        <label>Roll Number</label>
         <input type="text" id="rollNo" placeholder="e.g. 210105001" required />
       </div>
 
       <div class="form-group">
-        <label for="name">Student Name</label>
+        <label>Student Name</label>
         <input type="text" id="name" placeholder="Full Name" required />
       </div>
 
       <div class="form-group">
-        <label for="branch">Branch</label>
-        <input type="text" id="branch" placeholder="e.g. IT" required />
+        <label>Branch</label>
+        <input type="text" id="branch" placeholder="e.g. Information Technology" required />
       </div>
 
       <div class="form-group">
-        <label for="apaarId">APAAR ID</label>
-        <input type="text" id="apaarId" placeholder="12-digit APAAR Number" required />
+        <label>Father's Name</label>
+        <input type="text" id="fatherName" placeholder="Father's Full Name" required />
       </div>
 
       <div class="form-group">
-        <label for="studentMobile">Student Mobile No</label>
+        <label>Mother's Name</label>
+        <input type="text" id="motherName" placeholder="Mother's Full Name" required />
+      </div>
+
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" id="email" placeholder="student@example.com" required />
+      </div>
+
+      <div class="form-group">
+        <label>Aadhaar Number</label>
+        <input type="text" id="aadhaarNo" placeholder="12-digit Aadhaar No" maxlength="12" pattern="[0-9]{12}" required />
+      </div>
+
+      <div class="form-group">
+        <label>APAAR ID</label>
+        <input type="text" id="apaarId" placeholder="12-digit APAAR ID" required />
+      </div>
+
+      <div class="form-group">
+        <label>Student Mobile No</label>
         <input type="tel" id="studentMobile" placeholder="10-digit number" pattern="[0-9]{10}" required />
       </div>
 
       <div class="form-group">
-        <label for="fatherMobile">Father Mobile No</label>
+        <label>Father's Mobile No</label>
         <input type="tel" id="fatherMobile" placeholder="10-digit number" pattern="[0-9]{10}" required />
       </div>
 
-      <button type="submit" class="btn-submit">Add Student Record</button>
+      <button type="submit" class="btn-submit">
+        <span>Register New Student</span> ➜
+      </button>
     </form>
 
-    <!-- Search Section -->
-    <div class="search-box">
-      <input 
-        type="text" 
-        id="searchInput" 
-        placeholder="🔍 Search student by Roll No, Name, or APAAR ID..." 
-        onkeyup="searchStudentRecords()"
-      />
+    <!-- Toolbar: Search + Export -->
+    <div class="toolbar">
+      <div class="search-input-wrap">
+        <input 
+          type="text" 
+          id="searchInput" 
+          placeholder="🔍 Search by Roll No, Name, Aadhaar, APAAR ID, or Email..." 
+          onkeyup="searchRecords()"
+        />
+      </div>
+      <button class="btn-export" onclick="exportToCSV()">
+        <span>Export to Excel/CSV</span> ⬇
+      </button>
     </div>
 
     <!-- Records Table -->
@@ -244,41 +415,50 @@
             <th>Roll No</th>
             <th>Name</th>
             <th>Branch</th>
+            <th>Father's Name</th>
+            <th>Mother's Name</th>
+            <th>Email</th>
+            <th>Aadhaar No</th>
             <th>APAAR ID</th>
-            <th>Student Mobile</th>
-            <th>Father Mobile</th>
+            <th>Student Phone</th>
+            <th>Father Phone</th>
             <th>Action</th>
           </tr>
         </thead>
-        <tbody id="studentTableBody">
-          <!-- Javascript dynamic content -->
-        </tbody>
+        <tbody id="studentTableBody"></tbody>
       </table>
     </div>
   </div>
 
   <script>
-    let students = JSON.parse(localStorage.getItem("students_data")) || [];
+    let students = JSON.parse(localStorage.getItem("students_master_db")) || [];
 
     const form = document.getElementById("studentForm");
     const tableBody = document.getElementById("studentTableBody");
     const searchInput = document.getElementById("searchInput");
 
-    // Form submission
+    // Add Record
     form.addEventListener("submit", function (e) {
       e.preventDefault();
 
       const rollNo = document.getElementById("rollNo").value.trim();
       const name = document.getElementById("name").value.trim();
       const branch = document.getElementById("branch").value.trim();
+      const fatherName = document.getElementById("fatherName").value.trim();
+      const motherName = document.getElementById("motherName").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const aadhaarNo = document.getElementById("aadhaarNo").value.trim();
       const apaarId = document.getElementById("apaarId").value.trim();
       const studentMobile = document.getElementById("studentMobile").value.trim();
       const fatherMobile = document.getElementById("fatherMobile").value.trim();
 
-      // Check unique Roll No or APAAR ID
-      const isDuplicate = students.some(s => s.rollNo.toLowerCase() === rollNo.toLowerCase());
-      if (isDuplicate) {
+      // Duplicate Check
+      if (students.some(s => s.rollNo.toLowerCase() === rollNo.toLowerCase())) {
         alert("A student with this Roll Number is already registered!");
+        return;
+      }
+      if (students.some(s => s.aadhaarNo === aadhaarNo)) {
+        alert("This Aadhaar Number is already associated with another record!");
         return;
       }
 
@@ -286,26 +466,30 @@
         rollNo,
         name,
         branch,
+        fatherName,
+        motherName,
+        email,
+        aadhaarNo,
         apaarId,
         studentMobile,
         fatherMobile
       };
 
       students.push(newRecord);
-      localStorage.setItem("students_data", JSON.stringify(students));
+      localStorage.setItem("students_master_db", JSON.stringify(students));
       
       form.reset();
       renderTable(students);
     });
 
-    // Render Data to Table
+    // Render Table
     function renderTable(data) {
       tableBody.innerHTML = "";
 
       if (data.length === 0) {
         tableBody.innerHTML = `
           <tr>
-            <td colspan="7" class="empty-state">No student records found.</td>
+            <td colspan="11" class="empty-state">No student records found matching your query.</td>
           </tr>
         `;
         return;
@@ -314,9 +498,13 @@
       data.forEach((st) => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
-          <td><strong>${st.rollNo}</strong></td>
-          <td>${st.name}</td>
+          <td><span class="badge-roll">${st.rollNo}</span></td>
+          <td><strong style="color:#ffffff;">${st.name}</strong></td>
           <td>${st.branch}</td>
+          <td>${st.fatherName}</td>
+          <td>${st.motherName}</td>
+          <td>${st.email}</td>
+          <td>${st.aadhaarNo}</td>
           <td>${st.apaarId}</td>
           <td>${st.studentMobile}</td>
           <td>${st.fatherMobile}</td>
@@ -330,25 +518,59 @@
 
     // Delete Record
     function deleteRecord(rollNo) {
-      if (confirm(`Are you sure you want to remove Roll No: ${rollNo}?`)) {
+      if (confirm(`Remove record for Roll Number: ${rollNo}?`)) {
         students = students.filter(s => s.rollNo !== rollNo);
-        localStorage.setItem("students_data", JSON.stringify(students));
+        localStorage.setItem("students_master_db", JSON.stringify(students));
         renderTable(students);
       }
     }
 
-    // Search Feature (Roll, Name, or APAAR ID)
-    function searchStudentRecords() {
-      const query = searchInput.value.toLowerCase().trim();
+    // Multi-Field Universal Search
+    function searchRecords() {
+      const q = searchInput.value.toLowerCase().trim();
       const filtered = students.filter(st => 
-        st.rollNo.toLowerCase().includes(query) ||
-        st.name.toLowerCase().includes(query) ||
-        st.apaarId.toLowerCase().includes(query)
+        st.rollNo.toLowerCase().includes(q) ||
+        st.name.toLowerCase().includes(q) ||
+        st.email.toLowerCase().includes(q) ||
+        st.aadhaarNo.includes(q) ||
+        st.apaarId.toLowerCase().includes(q) ||
+        st.studentMobile.includes(q)
       );
       renderTable(filtered);
     }
 
-    // First load execution
+    // Export Data to CSV (Directly opens in Excel)
+    function exportToCSV() {
+      if (students.length === 0) {
+        alert("No student data available to export!");
+        return;
+      }
+
+      const headers = ["Roll No", "Student Name", "Branch", "Father Name", "Mother Name", "Email", "Aadhaar No", "APAAR ID", "Student Mobile", "Father Mobile"];
+      const rows = students.map(s => [
+        `"${s.rollNo}"`,
+        `"${s.name}"`,
+        `"${s.branch}"`,
+        `"${s.fatherName}"`,
+        `"${s.motherName}"`,
+        `"${s.email}"`,
+        `"${s.aadhaarNo}"`,
+        `"${s.apaarId}"`,
+        `"${s.studentMobile}"`,
+        `"${s.fatherMobile}"`
+      ]);
+
+      const csvContent = "data:text/csv;charset=utf-8," + [headers.join(","), ...rows.map(e => e.join(","))].join("\n");
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", `Student_Records_${new Date().toISOString().slice(0,10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // Initialize View
     renderTable(students);
   </script>
 </body>
